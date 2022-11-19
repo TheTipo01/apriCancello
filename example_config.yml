@@ -1,0 +1,10 @@
+# Telegram bot token
+token:
+# Logging level
+loglevel: error
+# IP of the ESP12E
+endpoint: http://192.168.1.11
+# IDs of the users that can use the bot
+ids:
+  - 12345678
+  - 87654321
