@@ -4,7 +4,6 @@ import (
 	"github.com/bwmarrin/lit"
 	"github.com/kkyr/fig"
 	tele "gopkg.in/telebot.v3"
-	"math/rand"
 	"strings"
 	"time"
 )
@@ -14,12 +13,11 @@ var (
 	token string
 	// Subscribed users
 	whitelist map[int64]bool
-	endpoint  string
+	// Endpoint of the ESP8266
+	endpoint string
 )
 
 func init() {
-	rand.Seed(time.Now().UnixNano())
-
 	lit.LogLevel = lit.LogError
 
 	var cfg config

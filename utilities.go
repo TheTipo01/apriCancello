@@ -7,6 +7,9 @@ import (
 
 func apertura() error {
 	_, err := http.Get(endpoint + "/LED=ON1")
+	if err != nil {
+		return err
+	}
 
 	time.Sleep(100 * time.Millisecond)
 
