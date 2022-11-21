@@ -4,6 +4,8 @@ token:
 loglevel: informational
 # IP of the ESP12E
 endpoint: http://192.168.1.11
+# API key
+apikey: loremipsum
 # IDs of the users that can use the bot
 ids:
   - 12345678

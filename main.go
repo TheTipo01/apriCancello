@@ -15,6 +15,8 @@ var (
 	whitelist map[int64]bool
 	// Endpoint of the ESP8266
 	endpoint string
+	// API key for the ESP8266
+	key string
 )
 
 func init() {
@@ -30,6 +32,7 @@ func init() {
 	// Config file found
 	token = cfg.Token
 	endpoint = cfg.Endpoint
+	key = cfg.apiKey
 
 	whitelist = make(map[int64]bool, len(cfg.IDs))
 	for _, id := range cfg.IDs {
