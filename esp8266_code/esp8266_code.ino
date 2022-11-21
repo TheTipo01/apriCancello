@@ -36,7 +36,7 @@ void loop() {
   client.println("Content-Type: text/html");
   client.println("");
 
-  if (request.indexOf(endpoint) != -1) {
+  if (request.indexOf("/open") != -1) {
     digitalWrite(switch1, HIGH);
     delay(100);
     digitalWrite(switch1, LOW);
