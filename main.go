@@ -63,6 +63,21 @@ func main() {
 	b.Handle("/start", start)
 	b.Handle("/apri", apri)
 
+	b.Handle(tele.OnText, apri)
+	b.Handle(tele.OnAudio, apri)
+	b.Handle(tele.OnDocument, apri)
+	b.Handle(tele.OnPhoto, apri)
+	b.Handle(tele.OnSticker, apri)
+	b.Handle(tele.OnVideo, apri)
+	b.Handle(tele.OnVoice, apri)
+	b.Handle(tele.OnVideoNote, apri)
+
+	// Keyboard
+	menu := &tele.ReplyMarkup{ResizeKeyboard: true}
+	btnApri := menu.Text("Apri")
+
+	b.Handle(&btnApri, apri)
+
 	// Start bot
 	lit.Info("apriCancello is now running")
 	b.Start()
