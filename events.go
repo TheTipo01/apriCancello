@@ -14,7 +14,7 @@ func start(c tele.Context) error {
 		msg += "\nNon sei nella whitelist."
 	}
 
-	return c.Send(msg)
+	return c.Send(msg, menu)
 }
 
 func apri(c tele.Context) error {

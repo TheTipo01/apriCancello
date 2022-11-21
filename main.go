@@ -15,6 +15,8 @@ var (
 	whitelist map[int64]bool
 	// Endpoint of the ESP8266
 	endpoint string
+	// Menu
+	menu = &tele.ReplyMarkup{ResizeKeyboard: true}
 )
 
 func init() {
@@ -73,8 +75,10 @@ func main() {
 	b.Handle(tele.OnVideoNote, apri)
 
 	// Keyboard
-	menu := &tele.ReplyMarkup{ResizeKeyboard: true}
 	btnApri := menu.Text("Apri")
+	menu.Reply(
+		menu.Row(btnApri),
+	)
 
 	b.Handle(&btnApri, apri)
 
