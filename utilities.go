@@ -5,7 +5,11 @@ import (
 )
 
 func apertura() error {
-	_, err := http.Get(endpoint + "/open")
+	_, err := http.Get(endpoint)
+	if err != nil {
+		return err
+	}
 
+	_, err = http.Get(endpoint)
 	return err
 }
