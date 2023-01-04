@@ -52,14 +52,21 @@ func init() {
 }
 
 func main() {
-	// Create bot
-	b, err := tele.NewBot(tele.Settings{
-		Token:  token,
-		Poller: &tele.LongPoller{Timeout: 10 * time.Second},
-	})
-	if err != nil {
-		lit.Error(err.Error())
-		return
+	var err error
+	var b *tele.Bot
+
+	for {
+		// Create bot
+		b, err = tele.NewBot(tele.Settings{
+			Token:  token,
+			Poller: &tele.LongPoller{Timeout: 10 * time.Second},
+		})
+		if err == nil {
+			break
+		} else {
+			lit.Info("Can't connect to Telegram, retrying in 5 seconds...")
+			time.Sleep(5 * time.Second)
+		}
 	}
 
 	b.Handle("/start", start)
