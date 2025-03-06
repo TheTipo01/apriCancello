@@ -19,12 +19,16 @@ func start(c tele.Context) error {
 
 func apri(c tele.Context) error {
 	if _, ok := whitelist[c.Sender().ID]; ok {
-		_ = c.Send("Sto aprendo il cancello...")
-		err := apertura()
-		if err != nil {
-			return c.Send("Errore nell'apertura: " + err.Error())
+		if endpoint, ok := endpoints[c.Text()]; !ok {
+			return c.Send("Endpoint non trovato.")
 		} else {
-			return c.Send("Apertura effettuata.")
+			_ = c.Send("Sto aprendo " + c.Text() + "...")
+			err := apertura(endpoint)
+			if err != nil {
+				return c.Send("Errore nell'apertura: " + err.Error())
+			} else {
+				return c.Send("Apertura effettuata.")
+			}
 		}
 	} else {
 		return c.Send("Non sei nella whitelist.")

@@ -1,9 +1,16 @@
 # Telegram bot token
 token:
+
 # Logging level
 loglevel: informational
-# IP of the ESP12E
-endpoint: http://192.168.1.11
+
+# Endpoints to which the bot will send the GET requests
+endpoints:
+  - url: "http://192.168.1.11"
+    name: "Foo"
+  - url: "http://192.168.1.12"
+    name: "Bar"
+
 # IDs of the users that can use the bot
 ids:
   - 12345678

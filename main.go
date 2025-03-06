@@ -13,8 +13,8 @@ var (
 	token string
 	// Subscribed users
 	whitelist map[int64]bool
-	// Endpoint of the ESP8266
-	endpoint string
+	// Endpoints of things to open
+	endpoints map[string]string
 	// Menu
 	menu = &tele.ReplyMarkup{ResizeKeyboard: true}
 )
@@ -31,7 +31,12 @@ func init() {
 
 	// Config file found
 	token = cfg.Token
-	endpoint = cfg.Endpoint
+
+	// Set endpoints
+	endpoints = make(map[string]string, len(cfg.Endpoints))
+	for _, e := range cfg.Endpoints {
+		endpoints[e.Name] = e.URL
+	}
 
 	whitelist = make(map[int64]bool, len(cfg.IDs))
 	for _, id := range cfg.IDs {
@@ -72,22 +77,18 @@ func main() {
 	b.Handle("/start", start)
 	b.Handle("/apri", apri)
 
-	b.Handle(tele.OnText, apri)
-	b.Handle(tele.OnAudio, apri)
-	b.Handle(tele.OnDocument, apri)
-	b.Handle(tele.OnPhoto, apri)
-	b.Handle(tele.OnSticker, apri)
-	b.Handle(tele.OnVideo, apri)
-	b.Handle(tele.OnVoice, apri)
-	b.Handle(tele.OnVideoNote, apri)
+	rows := make([]tele.Row, 0, len(endpoints))
+
+	for k := range endpoints {
+		btn := menu.Text(k)
+		rows = append(rows, menu.Row(btn))
+		b.Handle(&btn, apri)
+	}
 
 	// Keyboard
-	btnApri := menu.Text("Apri")
 	menu.Reply(
-		menu.Row(btnApri),
+		rows...,
 	)
-
-	b.Handle(&btnApri, apri)
 
 	// Start bot
 	lit.Info("apriCancello is now running")

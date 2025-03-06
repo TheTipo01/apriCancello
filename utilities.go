@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func apertura() error {
+func apertura(endpoint string) error {
 	_, err := http.Get(endpoint)
 	if err != nil {
 		return err
