@@ -11,10 +11,12 @@ import (
 var (
 	// Telegram token
 	token string
+	// Home Assistant token
+	HAToken string
 	// Subscribed users
 	whitelist map[int64]bool
 	// Endpoints of things to open
-	endpoints map[string]string
+	endpoints map[string]endpoint
 	// Menu
 	menu = &tele.ReplyMarkup{ResizeKeyboard: true}
 )
@@ -31,11 +33,12 @@ func init() {
 
 	// Config file found
 	token = cfg.Token
+	HAToken = cfg.HAToken
 
 	// Set endpoints
-	endpoints = make(map[string]string, len(cfg.Endpoints))
+	endpoints = make(map[string]endpoint, len(cfg.Endpoints))
 	for _, e := range cfg.Endpoints {
-		endpoints[e.Name] = e.URL
+		endpoints[e.Name] = e
 	}
 
 	whitelist = make(map[int64]bool, len(cfg.IDs))

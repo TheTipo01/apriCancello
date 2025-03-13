@@ -1,17 +1,22 @@
 # Telegram bot token
 token:
 
+# Home Assistant long lived token, for authentication
+hatoken:
+
 # Logging level
 loglevel: informational
 
-# Endpoints to which the bot will send the GET requests
+# Endpoints to which the bot will send the POST requests
 endpoints:
-  - url: "http://192.168.1.11"
-    name: "Foo"
-  - url: "http://192.168.1.12"
-    name: "Bar"
+    - url: "https://homeassistant.example.com/api/services/switch/turn_on"
+      name: "Fancy switch"
+      id: "switch.fancy_switch_id"
+    - url: "https://homeassistant.example.com/api/services/light/turn_on"
+      name: "Fancy light"
+      id: "light.fancy_light_id"
 
 # IDs of the users that can use the bot
 ids:
-  - 12345678
-  - 87654321
+    - 12345678
+    - 87654321

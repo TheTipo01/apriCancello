@@ -19,11 +19,11 @@ func start(c tele.Context) error {
 
 func apri(c tele.Context) error {
 	if _, ok := whitelist[c.Sender().ID]; ok {
-		if endpoint, ok := endpoints[c.Text()]; !ok {
+		if e, ok := endpoints[c.Text()]; !ok {
 			return c.Send("Endpoint non trovato.")
 		} else {
 			_ = c.Send("Sto aprendo " + c.Text() + "...")
-			err := apertura(endpoint)
+			err := apertura(e)
 			if err != nil {
 				return c.Send("Errore nell'apertura: " + err.Error())
 			} else {
